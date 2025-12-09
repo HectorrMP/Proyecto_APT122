@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modernización Optifire - Final Restaurada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. CORE SETUP */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #e5e5e5; /* Neutral Desk Background */
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+            place-items: center;
+            font-family: 'Lato', sans-serif;
+            color: #1F1F1F; /* Carbón */
+        }
+
+        .slide-container {
+            align-items: center;
+            background-color: #F9F9F9; /* Gris Niebla */
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+            width: 1280px;
+        }
+
+        /* 2. DECORATIVE ELEMENTS - Clean & Energetic */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(240, 90, 34, 0.08) 0%, rgba(249, 249, 249, 0) 70%); /* Naranja Fuego Glow */
+            border-radius: 0 0 0 100%;
+            z-index: 0;
+        }
+
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(220, 40, 30, 0.05) 0%, rgba(249, 249, 249, 0) 70%); /* Rojo Optifire Glow */
+            border-radius: 0 100% 0 0;
+            z-index: 0;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 3. TYPOGRAPHY */
+        .slide-container h1,
+        .slide-container h2,
+        .slide-container h3,
+        .slide-container h4 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+
+        .slide-container h1 {
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            color: #DC281E; /* Rojo Optifire */
+            line-height: 1;
+        }
+        
+        .slide-container h1 span {
+            color: #F05A22; /* Naranja Fuego */
+        }
+
+        .slide-container h2.slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #DC281E; /* Rojo Optifire */
+            border-left: 6px solid #FFC20E; /* Amarillo Luz */
+            padding-left: 20px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .slide-container h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #F05A22; /* Naranja Fuego */
+            margin-bottom: 15px;
+        }
+
+        .slide-container p,
+        .slide-container li {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #1F1F1F; /* Carbón */
+        }
+
+        .slide-container ul {
+            padding-left: 25px;
+        }
+
+        .slide-container li {
+            margin-bottom: 10px;
+        }
+        
+        .slide-container li::marker {
+            color: #F05A22; /* Naranja Fuego bullets */
+        }
+
+        /* 4. UTILITY CLASSES & LAYOUTS */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Tiles / Cards - White on Light Grey */
+        .tiled-content {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .tile {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            padding: 25px;
+            flex: 1;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .tile:hover {
+            transform: translateY(-5px);
+            border-color: #F05A22;
+        }
+
+        /* Icons - Amarillo Luz with Rojo/Naranja */
+        .tile .icon-container {
+            background: #FFF8E1; /* Very light yellow bg */
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid #FFC20E; /* Amarillo Luz Border */
+        }
+
+        .tile .icon {
+            font-size: 32px;
+            color: #DC281E; /* Rojo Optifire Icon */
+        }
+
+        /* Tech Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .tech-tile {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        
+        .tech-tile:hover {
+            border-color: #FFC20E;
+        }
+
+        .tech-tile i {
+            font-size: 28px;
+            color: #F05A22; /* Naranja Fuego */
+            margin-bottom: 10px;
+        }
+
+        /* Image Wrapper */
+        .image-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 400px;
+            position: relative;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E5E5E5;
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-wrapper.contain img {
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 20px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            border: 1px solid #E5E5E5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+            justify-content: flex-end;
+            width: 12%;
+        }
+
+        .bar {
+            width: 100%;
+            background: linear-gradient(180deg, #F05A22 0%, #DC281E 100%); /* Naranja to Rojo */
+            border-radius: 6px 6px 0 0;
+            transition: height 1s ease-out;
+        }
+        
+        .bar.alt {
+            background: linear-gradient(180deg, #FFC20E 0%, #F59E0B 100%); /* Amarillo */
+        }
+
+        .bar-value { color: #1F1F1F; font-weight: bold; margin-bottom: 5px; }
+        .bar-label { font-size: 14px; color: #666; font-weight: 600; }
+
+        /* Bleed Image Layout */
+        .slide-container.bleed-image-layout {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0;
+            align-items: start;
+            padding: 0;
+            background: #FFFFFF;
+        }
+        .slide-container.bleed-image-layout .content-container { 
+            padding: 80px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            height: 100%; 
+        }
+        .slide-container.bleed-image-layout .image-container { height: 100%; width: 100%; }
+        .slide-container.bleed-image-layout img { height: 100%; width: 100%; object-fit: cover; max-height: 720px; }
+
+        /* Sprint Timeline Styles */
+        .sprint-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .sprint-card {
+            background: #FFFFFF;
+            border-top: 5px solid #DC281E;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #E5E5E5;
+        }
+        
+        .sprint-card h4 { 
+            font-size: 20px; 
+            margin-bottom: 15px; 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            color: #1F1F1F;
+        }
+        
+        .sprint-card h4 span { 
+            font-size: 12px; 
+            background: #FFF8E1; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            color: #DC281E; 
+            border: 1px solid #FFC20E;
+            font-weight: 700;
+        }
+        
+        .sprint-card ul { list-style: none; padding: 0; margin-top: 10px; }
+        .sprint-card li { font-size: 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .sprint-card li::before { content: '•'; color: #FFC20E; font-size: 24px; line-height: 1; }
+
+        /* Team Cards */
+        .team-grid {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .team-member {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            padding: 30px;
+            width: 30%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .team-member::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #DC281E; }
+        .team-member:nth-child(2)::before { background: #F05A22; }
+        .team-member:nth-child(3)::before { background: #FFC20E; }
+        
+        .team-member h3 { color: #1F1F1F; margin-bottom: 5px; font-size: 24px; }
+        .team-member p { color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; margin: 0; }
+        .team-icon { 
+            font-size: 40px; 
+            color: #DC281E; 
+            margin-bottom: 20px; 
+            background: #FFF5F5; 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto 20px; 
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<!-- Photo by Unsplash: Industrial Fire Safety Context -->
+<div class="slide-container full-bg" id="slide1" style="padding: 0; background-image: url('https://images.unsplash.com/photo-1629813292025-b77873216896?auto=format&fit=crop&q=80&w=2070'); background-size: cover; background-position: center;">
+    <div style="width: 100%; height: 100%; background: rgba(31, 31, 31, 0.85); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div style="text-align: center; padding: 60px; border: 2px solid #FFC20E; border-radius: 0; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px);">
+            <h1 style="color: #FFFFFF;">Modernización <span style="color: #FFC20E;">Optifire</span></h1>
+            <p style="font-size: 24px; margin-top: 20px; color: #F9F9F9;">Implementación de sistema Inspexmax</p>
+            <p style="font-size: 18px; color: #F05A22; margin-top: 10px; font-weight: 700; letter-spacing: 2px;">GRUPO GMD</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 2: Context -->
+<div class="slide-container bleed-image-layout" id="slide2">
+    <div class="content-container">
+        <h2 class="slide-title">¿Quién es Optifire?</h2>
+        <p>Empresa especializada en el diseño e instalación de sistemas de seguridad y prevención de incendios.</p>
+        <ul style="margin-top: 20px;">
+            <li><strong>Industrias:</strong> Minería, Portuaria y Transporte.</li>
+            <li><strong>Misión:</strong> Operaciones críticas en ambientes hostiles.</li>
+            <li><strong>Productos:</strong> Stremax, Reacton.</li>
+        </ul>
+    </div>
+    <div class="image-container">
+        <!-- Photo by Unsplash: Heavy Industry/Mining -->
+        <img src="C:\Users\hemor\OneDrive\Imágenes\imagenes Optifire\banner1-1300x405.png" alt="Mining Environment Fire Safety">
+    </div>
+</div>
+
+<!-- Slide 3: Organization -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Estructura Organizacional</h2>
+    <div class="content-area">
+        <div class="chart-container">
+            <div class="bar-group"><div class="bar-value">16</div><div class="bar" style="height: 90%;"></div><div class="bar-label">Operaciones</div></div>
+            <div class="bar-group"><div class="bar-value">8</div><div class="bar alt" style="height: 50%;"></div><div class="bar-label">Ventas</div></div>
+            <div class="bar-group"><div class="bar-value">5</div><div class="bar" style="height: 35%;"></div><div class="bar-label">Admin</div></div>
+            <div class="bar-group"><div class="bar-value">4</div><div class="bar alt" style="height: 28%;"></div><div class="bar-label">Finanzas</div></div>
+            <div class="bar-group"><div class="bar-value">3</div><div class="bar" style="height: 20%;"></div><div class="bar-label">RRHH</div></div>
+        </div>
+        <p style="text-align: center; margin-top: 30px; font-style: italic; color: #666;">Organización actual de 36 colaboradores</p>
+    </div>
+</div>
+
+<!-- Slide 4: Problem (EDITED) -->
+<div class="slide-container" id="slide4">
+    <div class="content-area" style="text-align: center; max-width: 1000px;">
+        <div style="background: #FFF8E1; width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; border: 3px solid #FFC20E;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 60px; color: #DC281E;"></i>
+        </div>
+        <!-- CHANGED TEXT HERE -->
+        <h2 style="font-size: 36px; margin-bottom: 20px; color: #1F1F1F;">Obsolescencia en sus procesos administrativos y operativos</h2>
+        <p style="font-size: 26px; color: #555;">"Las limitantes en la gestión manual impiden a Optifire madurar como organización y consolidar su liderazgo en la industria, a pesar de la calidad de sus productos."</p>
+    </div>
+</div>
+
+<!-- Slide 5: Solution -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Solución: Sistema Inspexmax</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3>Plataforma Web Integral</h3>
+                <p>Automatización de procesos para la gestión del ciclo de vida de órdenes de trabajo.</p>
+                <ul style="margin-top: 20px;">
+                    <li><i class="fa-solid fa-check" style="color:#F05A22;"></i> Trazabilidad total del servicio.</li>
+                    <li><i class="fa-solid fa-check" style="color:#F05A22;"></i> Centralización de información.</li>
+                    <li><i class="fa-solid fa-check" style="color:#F05A22;"></i> Transparencia con el cliente.</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <!-- Photo by Unsplash: Dashboard/Analytics -->
+                <img src="C:\Users\hemor\OneDrive\Escritorio\Inspexmax5.png" alt="Dashboard Interface Mockup">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Objectives -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Objetivos del Proyecto</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div style="background: #FFF5F5; padding: 30px; border-radius: 12px; border-left: 5px solid #DC281E; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <h3 style="color: #DC281E;"><i class="fa-solid fa-bullseye"></i> Objetivo General</h3>
+                <p>Desarrollar e implementar un sistema de información web para la gestión integral de órdenes de trabajo, automatizando procesos operativos.</p>
+            </div>
+            <div>
+                <h3>Objetivos Específicos</h3>
+                <ul>
+                    <li>Analizar procesos de negocio actuales.</li>
+                    <li>Diseñar arquitectura y modelo de datos.</li>
+                    <li>Desarrollar módulos en Python/Django.</li>
+                    <li>Implementar funcionalidades de flujo de trabajo.</li>
+                    <li>Ejecutar pruebas integrales y despliegue.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Methodology -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Metodología de Trabajo</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #DC281E;"><i class="fa-solid fa-rotate" style="margin-right: 10px; color: #FFC20E;"></i> SCRUM</h3>
+                    <p>Elegido por la necesidad de <strong>comunicación constante</strong> con el cliente y la flexibilidad para adaptarse a requerimientos cambiantes a través de iteraciones cortas.</p>
+                </div>
+                <div>
+                    <h3 style="color: #DC281E;"><i class="fa-solid fa-list-check" style="margin-right: 10px; color: #FFC20E;"></i> KANBAN</h3>
+                    <p>Utilizado para la gestión visual del flujo de trabajo, asignación de tareas y control del estado de avance en tiempo real.</p>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div style="background: #FFF8E1; width: 200px; height: 200px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 4px solid #F05A22;">
+                    <i class="fa-solid fa-people-arrows" style="font-size: 80px; color: #DC281E;"></i>
+                </div>
+                <p style="margin-top: 20px; font-weight: 700;">Reuniones periódicas de definición y seguimiento.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Team -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Integrantes del Proyecto</h2>
+    <div class="content-area">
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <h3>Héctor Morales</h3>
+                <p>Product Owner</p>
+            </div>
+            <div class="team-member">
+                <div class="team-icon"><i class="fa-solid fa-user-gear"></i></div>
+                <h3>Carlos Guerra</h3>
+                <p>Scrum Master</p>
+            </div>
+            <div class="team-member">
+                <div class="team-icon"><i class="fa-solid fa-code"></i></div>
+                <h3>Diego Marin</h3>
+                <p>Equipo Desarrollador</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Tech Stack -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">Stack Tecnológico</h2>
+    <div class="content-area">
+        <div class="tech-grid">
+            <div class="tech-tile"><i class="fa-brands fa-python"></i><span>Python</span></div>
+            <div class="tech-tile"><i class="fa-solid fa-layer-group"></i><span>Django</span></div>
+            <div class="tech-tile"><i class="fa-solid fa-database"></i><span>PostgreSQL</span></div>
+            <div class="tech-tile"><i class="fa-solid fa-arrows-spin"></i><span>Metodología Ágil</span></div>
+            
+            <div class="tech-tile"><i class="fa-brands fa-github"></i><span>Github Actions</span></div>
+            <div class="tech-tile"><i class="fa-solid fa-code"></i><span>VS Code</span></div>
+            <div class="tech-tile"><i class="fa-solid fa-server"></i><span>App Services</span></div>
+            <div class="tech-tile"><i class="fa-solid fa-check-double"></i><span>ClickUp</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Architecture -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">Arquitectura de Software</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="image-wrapper contain">
+                <!-- Wikimedia Commons: MVC Diagram -->
+                <img src="C:\Users\hemor\OneDrive\Escritorio\Arquitectura Cloud Inspexmax.png" alt="MVC Architecture Diagram">
+            </div>
+            <div>
+                <h3>Arquitectura MVT</h3>
+                <p>Implementación basada en el patrón Modelo-Vista-Template de Django.</p>
+                <ul style="margin-top: 20px;">
+                    <li><strong>Seguridad:</strong> Middleware de autenticación.</li>
+                    <li><strong>Frontend:</strong> Django Templates (HTML/CSS/JS).</li>
+                    <li><strong>Backend:</strong> Lógica de negocio en Python.</li>
+                    <li><strong>Datos:</strong> ORM para abstracción de BD.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Timeline -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Cronograma (MVP Modular)</h2>
+    <div class="content-area">
+        <p style="margin-bottom: 20px;">Desarrollo incremental en 3 Sprints para alcanzar el Producto Mínimo Viable.</p>
+        <div class="sprint-container">
+            <div class="sprint-card" style="border-top-color: #F05A22;">
+                <h4>Sprint 1 <span>Inicio</span></h4>
+                <ul>
+                    <li>Configuración de entorno.</li>
+                    <li>Modelo de datos (Usuarios).</li>
+                    <li>Sistema de Autenticación.</li>
+                    <li>CRUD de Entidades base.</li>
+                </ul>
+            </div>
+            <div class="sprint-card" style="border-top-color: #DC281E;">
+                <h4>Sprint 2 <span>Núcleo</span></h4>
+                <ul>
+                    <li>Lógica de Órdenes de Trabajo.</li>
+                    <li>Gestión de Estados de OT.</li>
+                    <li>Asignación de Técnicos.</li>
+                    <li>Vistas de Operaciones.</li>
+                </ul>
+            </div>
+            <div class="sprint-card" style="border-top-color: #FFC20E;">
+                <h4>Sprint 3 <span>Cierre</span></h4>
+                <ul>
+                    <li>Reportabilidad básica.</li>
+                    <li>Pruebas de integración.</li>
+                    <li>Corrección de errores.</li>
+                    <li>Despliegue a Producción.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Database Model -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title">Modelo de Base de Datos</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3>Diseño Relacional</h3>
+                <p>El modelo de datos ha sido diseñado para garantizar la integridad referencial y la escalabilidad del sistema.</p>
+                <p style="margin-top: 20px; font-size: 16px; color: #666;">
+                    <i class="fa-solid fa-arrow-right" style="color: #F05A22;"></i> Normalización para evitar redundancia.<br>
+                    <i class="fa-solid fa-arrow-right" style="color: #F05A22;"></i> Relaciones optimizadas para consultas rápidas.<br>
+                    <i class="fa-solid fa-arrow-right" style="color: #F05A22;"></i> Auditoría de cambios en registros críticos.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Slide 12: Database Model -->
+<!-- Slide 12: Database Model (Full Layout) -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title">Modelo de Base de Datos</h2>
+    <!-- Se elimina el padding del content-area para maximizar espacio -->
+    <div class="content-area" style="width: 100%; height: 100%; padding: 0;">
+        <!-- Usamos un wrapper que ocupe todo el alto disponible -->
+        <div style="width: 100%; height: 550px; display: flex; align-items: center; justify-content: center;">
+            <img 
+                src="C:\Users\hemor\OneDrive\Escritorio\Diagramadebasededatosoptifire.png"
+                alt="Diagrama Modelo de Datos" 
+                style="width: 100%; height: 100%; object-fit: contain;"
+            >
+        </div>
+    </div>
+</div>
+
+<!-- Slide 13: Scope & Limitations -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">Alcance y Limitaciones</h2>
+    <div class="content-area">
+        <div class="two-column" style="align-items: start;">
+            <div style="background: #FFFFFF; padding: 30px; border-radius: 12px; border-top: 4px solid #10b981; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <h3 style="color: #10b981;"><i class="fa-solid fa-circle-check"></i> Alcance</h3>
+                <ul style="font-size: 16px;">
+                    <li>Gestión de Usuarios, Roles y Autenticación.</li>
+                    <li>Ciclo de vida completo de Órdenes de Trabajo.</li>
+                    <li>Panel para Técnicos y Administrativos.</li>
+                    <li>Generación de Reportes y Trazabilidad.</li>
+                </ul>
+            </div>
+            <div style="background: #FFFFFF; padding: 30px; border-radius: 12px; border-top: 4px solid #EF4444; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <h3 style="color: #EF4444;"><i class="fa-solid fa-ban"></i> Limitaciones</h3>
+                <ul style="font-size: 16px;">
+                    <li>Facturación Electrónica e Integración Contable.</li>
+                    <li>Aplicación Móvil Nativa (Fase 2).</li>
+                    <li>Integración IoT en tiempo real.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Difficulties -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">Dificultades y Desafíos</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon-container"><i class="icon fa-solid fa-book"></i></div>
+                <h3>Versionamiento</h3>
+                <p>Mantener la lógica del control de versiones github y luego hacer merge para unir las versiones</p>
+            </div>
+            <div class="tile">
+                <div class="icon-container"><i class="icon fa-solid fa-clock"></i></div>
+                <h3>Plazos (Timeboxing)</h3>
+                <p>Cumplir estrictamente con los tiempos definidos para cada tarea dentro de los Sprints.</p>
+            </div>
+            <div class="tile">
+                <div class="icon-container"><i class="icon fa-solid fa-graduation-cap"></i></div>
+                <h3>Despliegue a Internet</h3>
+                <p>El despliegue de la aplicación presentó complicaciones</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Results -->
+<div class="slide-container" id="slide15">
+    <h2 class="slide-title">Resultados del Proyecto</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="tile" style="text-align: left; background: transparent; border: none; box-shadow: none; padding: 0;">
+                <h3 style="margin-bottom: 20px;">Impacto Directo</h3>
+                <ul style="font-size: 20px;">
+                    <li style="margin-bottom: 20px;"><i class="fa-solid fa-check-circle" style="color: #DC281E; margin-right: 10px;"></i> <strong>Eficiencia Operativa:</strong> Reducción de tiempos administrativos.</li>
+                    <li style="margin-bottom: 20px;"><i class="fa-solid fa-check-circle" style="color: #DC281E; margin-right: 10px;"></i> <strong>Integridad de Datos:</strong> Eliminación de errores por ingreso manual.</li>
+                    <li style="margin-bottom: 20px;"><i class="fa-solid fa-check-circle" style="color: #DC281E; margin-right: 10px;"></i> <strong>Satisfacción:</strong> Mejora en la percepción del cliente final.</li>
+                </ul>
+            </div>
+            <div class="tile" style="background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="background: #FFF5F5; padding: 30px; border-radius: 50%; margin-bottom: 20px;">
+                    <i class="fa-solid fa-chart-line" style="font-size: 80px; color: #F05A22;"></i>
+                </div>
+                <h3>Transformación Digital</h3>
+                <p>Optifire ahora cuenta con una base tecnológica sólida para escalar sus operaciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 16: Closing -->
+<div class="slide-container" id="slide16">
+    <div class="content-area" style="text-align: center;">
+        <h1 style="font-size: 100px; margin-bottom: 10px;">GRACIAS</h1>
+        <p style="font-size: 24px; color: #666; letter-spacing: 4px; text-transform: uppercase;">Por su atención</p>
+        
+        <div style="margin-top: 60px; display: inline-block; text-align: left; background: #FFFFFF; padding: 40px; border-radius: 12px; border: 1px solid #E5E5E5; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div style="margin-bottom: 15px; display: flex; align-items: center;"><i class="fa-solid fa-envelope" style="color: #F05A22; width: 30px; font-size: 20px;"></i> <span style="font-weight: 600;">contacto@optifire.cl</span></div>
+            <div style="margin-bottom: 15px; display: flex; align-items: center;"><i class="fa-solid fa-globe" style="color: #F05A22; width: 30px; font-size: 20px;"></i> <span style="font-weight: 600;">www.optifire.cl</span></div>
+            <div style="display: flex; align-items: center;"><i class="fa-brands fa-linkedin" style="color: #F05A22; width: 30px; font-size: 20px;"></i> <span style="font-weight: 600;">Optifire Ltda.</span></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
